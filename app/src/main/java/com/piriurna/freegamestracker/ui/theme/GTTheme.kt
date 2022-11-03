@@ -22,7 +22,7 @@ private val DarkColorPalette = darkColors(
 private val LightColorPalette = lightColors(
     primary = Salmon,
     secondary = Blue,
-    background = White,
+    background = Violet,
     surface = Grape,
     onPrimary = White,
     onSecondary = White,
@@ -31,8 +31,6 @@ private val LightColorPalette = lightColors(
     error = Red,
     onError = White
 )
-
-const val BackgroundColor = 0xFF1E183D
 
 @Composable
 fun FreeGamesTrackerTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
