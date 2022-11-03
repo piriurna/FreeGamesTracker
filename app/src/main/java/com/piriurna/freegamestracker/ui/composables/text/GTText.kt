@@ -1,5 +1,7 @@
 package com.piriurna.freegamestracker.ui.composables.text
 
+import android.content.res.Configuration.UI_MODE_NIGHT_NO
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -12,6 +14,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import com.piriurna.freegamestracker.ui.composables.preview.GTThemedPreviewColumn
+import com.piriurna.freegamestracker.ui.theme.BackgroundColor
 import com.piriurna.freegamestracker.ui.theme.GTStyle.TextPlay
 import com.piriurna.freegamestracker.ui.theme.GTStyle.TextPlay20
 import com.piriurna.freegamestracker.ui.theme.GTStyle.TextPlayBold
