@@ -1,0 +1,29 @@
+package com.piriurna.freegamestracker.ui.composables.preview
+
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.material.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import com.piriurna.freegamestracker.ui.theme.FreeGamesTrackerTheme
+
+@Composable
+fun GTThemedPreviewBox(
+    modifier : Modifier = Modifier,
+    contentAlignment: Alignment = Alignment.TopStart,
+    propagateMinConstraints: Boolean = false,
+    content : @Composable BoxScope.() -> Unit,
+) {
+    FreeGamesTrackerTheme {
+        Surface {
+            Box(
+                modifier = modifier,
+                contentAlignment = contentAlignment,
+                propagateMinConstraints = propagateMinConstraints
+            ) {
+                content()
+            }
+        }
+    }
+}
