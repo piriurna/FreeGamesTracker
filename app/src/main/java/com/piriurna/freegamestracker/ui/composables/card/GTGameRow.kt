@@ -13,6 +13,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.piriurna.freegamestracker.ui.composables.preview.GTThemedPreviewColumn
+import com.piriurna.freegamestracker.ui.composables.rating.GTStarRating
 import com.piriurna.freegamestracker.ui.composables.text.GTText
 import com.piriurna.freegamestracker.ui.theme.GTStyle.TextPlay20
 import com.piriurna.freegamestracker.ui.theme.Gray
@@ -22,7 +23,7 @@ fun GTGameRow(
     modifier: Modifier = Modifier,
     title: String = "GTA4",
     genre: String = "Ação",
-    rating: Double = 4.5,
+    rating: Float = 4.5f,
     gameImageId: Int = com.piriurna.freegamestracker.R.drawable.ic_launcher_background,
     // TODO gameImage: String = "URL"
 ) {
@@ -59,7 +60,13 @@ fun GTGameRow(
 
                 GTText(text = title, style = TextPlay20, maxLines = 1, overflow = TextOverflow.Ellipsis)
                 GTText(text = genre, color = Gray)
-                GTText(modifier = Modifier.padding(top = 4.dp),text = rating.toString())
+                GTStarRating(
+                    modifier = Modifier
+                        .fillMaxWidth(0.4f)
+                        .padding(top = 8.dp),
+                    rating = rating,
+                    spaceBetween = 4.dp
+                )
             }
         }
     }
