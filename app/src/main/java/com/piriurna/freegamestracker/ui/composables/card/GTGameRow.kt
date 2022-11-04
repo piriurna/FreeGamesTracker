@@ -6,7 +6,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -34,8 +33,6 @@ fun GTGameRow(
         modifier = modifier
             .fillMaxWidth()
             .height(108.dp),
-
-        backgroundColor = Color(red = 70, green = 63, blue = 113),
         shape = MaterialTheme.shapes.medium,
         elevation = 8.dp,
     ) {
