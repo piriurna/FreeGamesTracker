@@ -19,11 +19,15 @@ fun GTThemedPreviewColumn(
     content : @Composable ColumnScope.() -> Unit,
 ) {
     FreeGamesTrackerTheme {
-        Column(
-            modifier = modifier.background(MaterialTheme.colors.background),
-            verticalArrangement = verticalArrangement,
-            horizontalAlignment = horizontalAlignment,
-            content = content
-        )
+        Surface(
+            modifier = Modifier.background(MaterialTheme.colors.background)
+        ) {
+            Column(
+                modifier = modifier,
+                verticalArrangement = verticalArrangement,
+                horizontalAlignment = horizontalAlignment,
+                content = content
+            )
+        }
     }
 }
