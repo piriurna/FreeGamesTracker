@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.drawscope.ContentDrawScope
 import androidx.compose.ui.graphics.drawscope.clipRect
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -60,7 +61,7 @@ fun GTStarRating(
                             modifier = Modifier.size(imageSize.toDp()),
                             colorFilter = ColorFilter.tint(starColor),
                             painter = painterResource(id = emptyStar),
-                            contentDescription = "Empty Star"
+                            contentDescription = stringResource(R.string.empty_star)
                         )
                     }
                 }
@@ -86,7 +87,7 @@ fun GTStarRating(
                             modifier = Modifier.size(imageSize.toDp()),
                             colorFilter = ColorFilter.tint(starColor),
                             painter = painterResource(id = filledStar),
-                            contentDescription = "Filled Star"
+                            contentDescription = stringResource(R.string.full_star)
                         )
                     }
                 }
