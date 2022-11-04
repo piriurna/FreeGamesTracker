@@ -1,6 +1,5 @@
 package com.piriurna.freegamestracker.ui.composables.preview
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.material.MaterialTheme
@@ -19,7 +18,7 @@ fun GTThemedPreviewBox(
 ) {
     FreeGamesTrackerTheme {
         Surface(
-            modifier = Modifier.background(MaterialTheme.colors.background)
+            color = MaterialTheme.colors.background
         ) {
             Box(
                 modifier = modifier,
