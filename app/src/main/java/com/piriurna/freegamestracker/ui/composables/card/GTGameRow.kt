@@ -12,6 +12,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.piriurna.freegamestracker.ui.composables.preview.GTThemedPreviewColumn
 import com.piriurna.freegamestracker.ui.composables.text.GTText
 import com.piriurna.freegamestracker.ui.theme.GTStyle.TextPlay20
 import com.piriurna.freegamestracker.ui.theme.Gray
@@ -67,7 +68,7 @@ fun GTGameRow(
 @Preview(showBackground = true)
 @Composable
 fun GTGameRowPreview() {
-    Column(
+    GTThemedPreviewColumn(
         modifier = Modifier.padding(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
