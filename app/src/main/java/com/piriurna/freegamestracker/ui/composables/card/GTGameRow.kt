@@ -1,6 +1,5 @@
 package com.piriurna.freegamestracker.ui.composables.card
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -8,10 +7,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import com.piriurna.freegamestracker.R
 import com.piriurna.freegamestracker.ui.composables.preview.GTThemedPreviewColumn
 import com.piriurna.freegamestracker.ui.composables.rating.GTStarRating
 import com.piriurna.freegamestracker.ui.composables.text.GTText
@@ -21,11 +24,11 @@ import com.piriurna.freegamestracker.ui.theme.Gray
 @Composable
 fun GTGameRow(
     modifier: Modifier = Modifier,
-    title: String = "GTA4",
-    genre: String = "Ação",
-    rating: Float = 4.5f,
-    gameImageId: Int = com.piriurna.freegamestracker.R.drawable.ic_launcher_background,
-    // TODO gameImage: String = "URL"
+    title: String,
+    genre: String,
+    rating: Float,
+    placeHolder: Int = R.drawable.ic_launcher_background,
+    gameImage: String
 ) {
     Card(
         modifier = modifier
@@ -42,14 +45,20 @@ fun GTGameRow(
                 .padding(bottom = 20.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            //image here
-            Image(
+            val request = ImageRequest
+                .Builder(LocalContext.current)
+                .data(gameImage)
+                .crossfade(false)
+                .placeholder(placeHolder)
+                .build()
+
+            AsyncImage(
                 modifier = Modifier
-                    .padding(top = 20.dp)
-                    .clip(shape = MaterialTheme.shapes.medium)
-                    .fillMaxHeight(),
-                painter = painterResource(id = gameImageId),
-                contentDescription = "game icon"
+                .padding(top = 20.dp)
+                .clip(shape = MaterialTheme.shapes.medium)
+                .fillMaxHeight(),
+                model = request,
+                contentDescription = stringResource(R.string.game_icon)
             )
             Column(
                 modifier = Modifier
@@ -79,8 +88,8 @@ fun GTGameRowPreview() {
         modifier = Modifier.padding(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        GTGameRow()
-        GTGameRow()
-        GTGameRow()
+        GTGameRow(title = "GTA4", genre = "Action", rating = 4.5f, gameImage = "https://icons.iconarchive.com/icons/th3-prophetman/gta/256/IV-icon.png")
+        GTGameRow(title = "Cyberpunk 2077", genre = "Adventure", rating = 2.5f, gameImage = "https://i1.modland.net/i/5fbcd2b1dc19b/7-1607466256-704411499-lg_modland.webp")
+        GTGameRow(title = "Risk of Rain 2", genre = "Roguelike", rating = 4.3f, gameImage = "https://play-lh.googleusercontent.com/lFo5oh3FSkfTz81H6WCedSwDL7tTxq34itYdY05DJVyvfjzOw2SjcvIRO1VqT1Xb3X8")
     }
 }
