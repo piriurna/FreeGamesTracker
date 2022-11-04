@@ -37,8 +37,8 @@ fun GTStarRating(
         modifier = modifier
     ) {
         with(LocalDensity.current){
-            val totalWidth = constraints.maxWidth - (spaceBetween.toPx() * (totalCount - 1))
-            val imageSize = totalWidth / totalCount
+            val actualWidth = constraints.maxWidth - (spaceBetween.toPx() * (totalCount - 1))
+            val imageSize = actualWidth / totalCount
 
             Box {
                 //DRAW ALL THE EMPTY RATING STARS
@@ -62,7 +62,7 @@ fun GTStarRating(
                             modifier = Modifier.size(imageSize.toDp()),
                             colorFilter = ColorFilter.tint(starColor),
                             painter = painterResource(id = emptyStar),
-                            contentDescription = ""
+                            contentDescription = "Empty Star"
                         )
                     }
                 }
@@ -88,7 +88,7 @@ fun GTStarRating(
                             modifier = Modifier.size(imageSize.toDp()),
                             colorFilter = ColorFilter.tint(starColor),
                             painter = painterResource(id = filledStar),
-                            contentDescription = ""
+                            contentDescription = "Filled Star"
                         )
                     }
                 }
@@ -101,14 +101,14 @@ fun GTStarRating(
 
 private fun ContentDrawScope.setBounds(totalCount: Int, rating : Float, imageSize : Float, spacing : Float, starType: StarType) {
     val remaining = rating - rating.toInt()
-    val ratingInt = (rating - remaining).toInt()
+    val completeStars = (rating - remaining).toInt()
 
-    val start = if(starType == StarType.Empty) rating * imageSize + ratingInt * spacing else 0f
+    val start = if(starType == StarType.Empty) rating * imageSize + completeStars * spacing else 0f
 
     val end = if(starType == StarType.Empty) {
         imageSize * totalCount + spacing * (totalCount - 1)
     } else {
-        rating * imageSize + ratingInt * spacing
+        rating * imageSize + completeStars * spacing
     }
 
 
