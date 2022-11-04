@@ -19,11 +19,15 @@ fun GTThemedPreviewRow(
     content : @Composable RowScope.() -> Unit,
 ) {
     FreeGamesTrackerTheme {
-        Row(
-            modifier = modifier.background(MaterialTheme.colors.background),
-            horizontalArrangement = horizontalArrangement,
-            verticalAlignment = verticalAlignment,
-            content = content
-        )
+        Surface(
+            modifier = Modifier.background(MaterialTheme.colors.background)
+        ) {
+            Row(
+                modifier = modifier,
+                horizontalArrangement = horizontalArrangement,
+                verticalAlignment = verticalAlignment,
+                content = content
+            )
+        }
     }
 }

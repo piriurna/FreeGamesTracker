@@ -18,11 +18,15 @@ fun GTThemedPreviewBox(
     content : @Composable BoxScope.() -> Unit,
 ) {
     FreeGamesTrackerTheme {
-        Box(
-            modifier = modifier.background(MaterialTheme.colors.background),
-            contentAlignment = contentAlignment,
-            propagateMinConstraints = propagateMinConstraints,
-            content = content
-        )
+        Surface(
+            modifier = Modifier.background(MaterialTheme.colors.background)
+        ) {
+            Box(
+                modifier = modifier,
+                contentAlignment = contentAlignment,
+                propagateMinConstraints = propagateMinConstraints,
+                content = content
+            )
+        }
     }
 }
