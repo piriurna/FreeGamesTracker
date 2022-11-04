@@ -2,10 +2,8 @@ package com.piriurna.freegamestracker.ui.composables.rating
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Color
@@ -20,8 +18,8 @@ import androidx.compose.ui.unit.dp
 import com.piriurna.freegamestracker.R
 import com.piriurna.freegamestracker.ui.composables.preview.GTThemedPreviewColumn
 import com.piriurna.freegamestracker.ui.composables.rating.models.StarType
+import com.piriurna.freegamestracker.ui.theme.Golden
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun GTStarRating(
     modifier: Modifier = Modifier,
@@ -30,7 +28,7 @@ fun GTStarRating(
     totalCount : Int = 5,
     filledStar : Int = R.drawable.ic_star_rating_full,
     emptyStar: Int = R.drawable.ic_star_rating_empty,
-    starColor : Color = MaterialTheme.colors.onPrimary
+    starColor : Color = Golden
 ) {
 
     BoxWithConstraints(
