@@ -1,6 +1,5 @@
 package com.piriurna.freegamestracker.ui.composables.preview
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -20,7 +19,7 @@ fun GTThemedPreviewColumn(
 ) {
     FreeGamesTrackerTheme {
         Surface(
-            modifier = Modifier.background(MaterialTheme.colors.background)
+            color = MaterialTheme.colors.background
         ) {
             Column(
                 modifier = modifier,
