@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.piriurna.freegamestracker'
+    namespace rootProject.androidconfig.namespace
     compileSdk rootProject.androidconfig.compileSdk
 
     defaultConfig {
-        applicationId "com.piriurna.freegamestracker"
+        applicationId rootProject.androidconfig.applicationId
         minSdk rootProject.androidconfig.minSdk
         targetSdk rootProject.androidconfig.targetSdk
         versionCode rootProject.androidconfig.versionCode
@@ -31,13 +31,13 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = rootProject.androidconfig.jvmTarget
     }
     buildFeatures {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion '1.1.1'
+        kotlinCompilerExtensionVersion rootProject.versions.composeCompiler
     }
     packagingOptions {
         resources {
@@ -48,18 +48,19 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
-    implementation 'androidx.activity:activity-compose:1.3.1'
+    implementation rootProject.libraries.androidx
+    implementation rootProject.libraries.lifecycleRuntimeKtx
+    implementation rootProject.libraries.activityCompose
     implementation rootProject.libraries.compose
     implementation rootProject.libraries.composeMaterial
     implementation rootProject.libraries.composeUiTooling
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
-    debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
-    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
+
+    testImplementation rootProject.libraries.jUnit
+    androidTestImplementation rootProject.tests.espresso
+
+    androidTestImplementation rootProject.tests.uiTestJunit4
+    debugImplementation rootProject.libraries.uiTooling
+    debugImplementation rootProject.tests.uiTestManifest
 
     implementation rootProject.libraries.coilCompose
 }
