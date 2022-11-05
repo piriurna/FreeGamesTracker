@@ -3,4 +3,6 @@
     <string name="game_icon">Game Icon</string>
     <string name="empty_star">Empty Star</string>
     <string name="full_star">Filled Star</string>
+    <string name="game_image">Game Image</string>
+    <string name="rating_star">Rating Star</string>
 </resources>

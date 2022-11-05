@@ -14,3 +14,9 @@ val Black = Color(0xFF000000)
 val White = Color(0xFFFBFBFB)
 val Gray = Color(0xFFCCCCCC)
 val Red = Color(0xFFB80C09)
+
+val DropDownGradient = listOf(
+    Black.copy(alpha = 0f),
+    Black.copy(alpha = 0.15f),
+    Black.copy(alpha = 0.8f)
+)

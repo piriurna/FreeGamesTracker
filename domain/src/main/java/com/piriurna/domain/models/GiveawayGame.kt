@@ -41,7 +41,7 @@ data class GiveawayGame(
                 title = "Free Rising Storm 2: Vietnam",
                 description = "Score Rising Storm 2: Vietnam for free via Epic Games Store! Rising Storm 2: Vietnam is a tactical shooter with 64-player battles and more than 20 maps! Grab it now!",
                 thumbnail = "https://www.gamerpower.com/offers/1b/5f7f2a354cd03.jpg",
-                image = "https://www.gamerpower.com/offers/1b/6363fb6194974.jpg",
+                image = "https://www.gamerpower.com/offers/1b/5f7f2a354cd03.jpg",
                 instructions = "1. Login into your Epic Games Store account.\r\n2. Click the \"GET\" button to add the game to your library.",
                 giveawayUrl = "https://www.gamerpower.com/open/free-rising-storm-2-vietnam-epic-store",
                 publishedDate = "2022-11-03 17:20:20",
