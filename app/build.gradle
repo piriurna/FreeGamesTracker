@@ -1,11 +1,18 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
     namespace rootProject.androidconfig.namespace
     compileSdk rootProject.androidconfig.compileSdk
+
+
+    packagingOptions {
+        pickFirst  '**'
+    }
 
     defaultConfig {
         applicationId rootProject.androidconfig.applicationId
@@ -24,6 +31,17 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "GAMER_POWER_BASE_URL", "\"https://www.gamerpower.com/api/\"")
+            buildConfigField("Long", "READ_TIMEOUT", "15L")
+            buildConfigField("Long", "CONNECT_TIMEOUT", "15L")
+        }
+
+        debug {
+            debuggable true
+            minifyEnabled false
+            buildConfigField("String", "GAMER_POWER_BASE_URL", "\"https://www.gamerpower.com/api/\"")
+            buildConfigField("Long", "READ_TIMEOUT", "15L")
+            buildConfigField("Long", "CONNECT_TIMEOUT", "15L")
         }
     }
     compileOptions {
@@ -47,6 +65,8 @@ android {
 }
 
 dependencies {
+    implementation project(':domain')
+    implementation project(':data')
 
     implementation rootProject.libraries.androidx
     implementation rootProject.libraries.lifecycleRuntimeKtx
@@ -63,4 +83,9 @@ dependencies {
     debugImplementation rootProject.tests.uiTestManifest
 
     implementation rootProject.libraries.coilCompose
+
+    implementation rootProject.libraries.hiltAndroid
+    kapt rootProject.libraries.hiltAndroidCompiler
+
+    implementation rootProject.libraries.hiltNavigationCompose
 }

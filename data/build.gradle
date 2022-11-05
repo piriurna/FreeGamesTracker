@@ -35,6 +35,8 @@ android {
 
 dependencies {
 
+    implementation project(':domain')
+
     implementation rootProject.libraries.androidx
     implementation rootProject.libraries.appCompat
     implementation rootProject.libraries.composeMaterial
