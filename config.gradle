@@ -18,6 +18,7 @@ ext.versions = [
     composeCompiler                 : '1.3.2',
     coil                            : '2.1.0',
     hilt                            : '2.44',
+    room                            : '2.4.3',
     hiltNavigationCompose           : '1.0.0-alpha03',
     gson                            : '2.9.1',
     dagger                          : '2.43.1',
@@ -117,7 +118,7 @@ ext.tests = [
     coroutines                : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.coroutines",
     espresso                  : "androidx.test.espresso:espresso-core:$versions.espresso",
 
-    uiTestJunit4              : "androidx.compose.ui:ui-test-junit4:$versions.composeVersion",
+    uiTestJunit4              : "androidx.compose.ui:ui-test-junit4:$versions.compose",
     uiTestManifest            : "androidx.compose.ui:ui-test-manifest:$versions.compose",
 ]
 

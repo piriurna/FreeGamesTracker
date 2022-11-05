@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     Box {
-                       GTGameRow()
+                        Greeting("Android")
                     }
                 }
             }
