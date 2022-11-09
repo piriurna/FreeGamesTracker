@@ -88,4 +88,6 @@ dependencies {
     kapt rootProject.libraries.hiltAndroidCompiler
 
     implementation rootProject.libraries.hiltNavigationCompose
+
+    implementation rootProject.libraries.lottie
 }
