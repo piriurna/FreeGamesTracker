@@ -1,5 +1,7 @@
 package com.piriurna.freegamestracker.ui.theme
 
+import androidx.compose.material.Colors
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 
@@ -9,6 +11,7 @@ val Green = Color(0xFF5CF64A)
 val Golden = Color(0xFFD98324)
 
 val Violet = Color(0xFF1E183D)
+val SpaceCadet = Color(0xFF302B4F)
 val Grape = Color(0xFF463F71)
 val Black = Color(0xFF000000)
 val White = Color(0xFFFBFBFB)
@@ -20,3 +23,7 @@ val DropDownGradient = listOf(
     Black.copy(alpha = 0.15f),
     Black.copy(alpha = 0.8f)
 )
+
+@get:Composable
+val Colors.secondaryBackground: Color
+    get() = if (isLight) Color(0xff252525) else Color(0xff252525)
