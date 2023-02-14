@@ -1,12 +1,9 @@
 package com.piriurna.freegamestracker.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 
-private val DarkColorPalette = darkColors(
+private val darkColorPalette = appColors(
     primary = Salmon,
     secondary = Blue,
     background = Violet,
@@ -16,10 +13,13 @@ private val DarkColorPalette = darkColors(
     onBackground = White,
     onSurface = White,
     error = Red,
-    onError = White
+    onError = White,
+    overlay = GrapeVariation,
+    rating = Golden,
+    status = Green
 )
 
-private val LightColorPalette = lightColors(
+private val lightColorPalette = appColors(
     primary = Salmon,
     secondary = Blue,
     background = Violet,
@@ -29,21 +29,24 @@ private val LightColorPalette = lightColors(
     onBackground = White,
     onSurface = White,
     error = Red,
-    onError = White
+    onError = White,
+    overlay = GrapeVariation,
+    rating = Golden,
+    status = Green
 )
 
 @Composable
 fun FreeGamesTrackerTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     val colors = if (darkTheme) {
-        DarkColorPalette
+        darkColorPalette
     } else {
-        LightColorPalette
+        lightColorPalette
     }
 
-    MaterialTheme(
+    AppTheme(
         colors = colors,
         typography = GTType.Typography,
-        shapes = GTShape.Shapes,
+        shapes = RoundedCornerShapes(),
         content = content
     )
 }

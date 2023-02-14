@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     Box {
-                        Greeting("Android")
+                        
                     }
                 }
             }
