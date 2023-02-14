@@ -21,7 +21,7 @@ import com.piriurna.freegamestracker.ui.theme.GTStyle.TextPlay20
 import com.piriurna.freegamestracker.ui.theme.Gray
 
 @Composable
-fun GTGameRow(
+fun GTRowWithLeftImageAndDescription(
     modifier: Modifier = Modifier,
     title: String,
     genre: String,
@@ -80,13 +80,13 @@ fun GTGameRow(
 
 @Preview(showBackground = true)
 @Composable
-fun GTGameRowPreview() {
+fun GTRowWithLeftImageAndDescriptionPreview() {
     GTThemedPreviewColumn(
         modifier = Modifier.padding(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        GTGameRow(title = "GTA4", genre = "Action", rating = 4.5f, gameImage = "https://icons.iconarchive.com/icons/th3-prophetman/gta/256/IV-icon.png")
-        GTGameRow(title = "Cyberpunk 2077", genre = "Adventure", rating = 2.5f, gameImage = "https://i1.modland.net/i/5fbcd2b1dc19b/7-1607466256-704411499-lg_modland.webp")
-        GTGameRow(title = "Risk of Rain 2", genre = "Roguelike", rating = 4.3f, gameImage = "https://play-lh.googleusercontent.com/lFo5oh3FSkfTz81H6WCedSwDL7tTxq34itYdY05DJVyvfjzOw2SjcvIRO1VqT1Xb3X8")
+        GTRowWithLeftImageAndDescription(title = "GTA4", genre = "Action", rating = 4.5f, gameImage = "https://icons.iconarchive.com/icons/th3-prophetman/gta/256/IV-icon.png")
+        GTRowWithLeftImageAndDescription(title = "Cyberpunk 2077", genre = "Adventure", rating = 2.5f, gameImage = "https://i1.modland.net/i/5fbcd2b1dc19b/7-1607466256-704411499-lg_modland.webp")
+        GTRowWithLeftImageAndDescription(title = "Risk of Rain 2", genre = "Roguelike", rating = 4.3f, gameImage = "https://play-lh.googleusercontent.com/lFo5oh3FSkfTz81H6WCedSwDL7tTxq34itYdY05DJVyvfjzOw2SjcvIRO1VqT1Xb3X8")
     }
 }

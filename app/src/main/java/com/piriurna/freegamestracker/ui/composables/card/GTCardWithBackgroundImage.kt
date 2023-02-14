@@ -27,7 +27,7 @@ import com.piriurna.freegamestracker.ui.theme.DropDownGradient
 import com.piriurna.freegamestracker.ui.theme.GTStyle.TextPlay20
 
 @Composable
-fun GTFreeGame(
+fun GTCardWithBackgroundImage(
     modifier: Modifier = Modifier,
     title: String,
     rating: Float,
@@ -91,7 +91,7 @@ fun GTFreeGame(
 
 @Preview(showBackground = true)
 @Composable
-fun GTFreeGamePreview() {
+fun GTCardWithBackgroundImagePreview() {
     GTThemedPreviewColumn(
         modifier = Modifier
             .padding(8.dp)
@@ -99,6 +99,6 @@ fun GTFreeGamePreview() {
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         val mock = GiveawayGame.mocks[0]
-        GTFreeGame(title = mock.title, rating = 3.5f, gameImage = mock.image)
+        GTCardWithBackgroundImage(title = mock.title, rating = 3.5f, gameImage = mock.image)
     }
 }
