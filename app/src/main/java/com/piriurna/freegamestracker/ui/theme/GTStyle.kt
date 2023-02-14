@@ -25,4 +25,18 @@ object GTStyle {
         fontSize = 20.sp,
         lineHeight = 4.sp
     )
+
+    val TextPlay20Bold = TextPlayBold.copy(
+        fontSize = 20.sp,
+        lineHeight = 4.sp
+    )
+
+    val TextPlay28 = TextPlay.copy(
+        fontSize = 28.sp,
+        lineHeight = 2.sp,
+
+    )
+    val TextPlay48Bold = TextPlayBold.copy(
+        fontSize = 48.sp,
+    )
 }

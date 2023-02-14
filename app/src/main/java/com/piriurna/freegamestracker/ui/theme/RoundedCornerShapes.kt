@@ -6,8 +6,8 @@ import androidx.compose.ui.unit.dp
 
 data class RoundedCornerShapes(
     val small: RoundedCornerShape= RoundedCornerShape(4.dp),
-    val medium: RoundedCornerShape = RoundedCornerShape(4.dp),
-    val large: RoundedCornerShape = RoundedCornerShape(0.dp)
+    val medium: RoundedCornerShape = RoundedCornerShape(20.dp),
+    val large: RoundedCornerShape = RoundedCornerShape(30.dp)
 )
 
 val LocalRoundedCornerShape = compositionLocalOf { RoundedCornerShapes() }

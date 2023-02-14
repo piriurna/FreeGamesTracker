@@ -5,4 +5,9 @@
     <string name="full_star">Filled Star</string>
     <string name="game_image">Game Image</string>
     <string name="rating_star">Rating Star</string>
+    <string name="retry">RETRY</string>
+    <string name="error">Error!</string>
+    <string name="no_internet_connection_available">No Internet Connection Available</string>
+    <string name="the_service_is_currently_unavailable">The service is currently unavailable.</string>
+    <string name="an_error_has_occurred">An error has occurred</string>
 </resources>

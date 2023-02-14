@@ -23,6 +23,8 @@ val DropDownGradient = listOf(
     Black.copy(alpha = 0.8f)
 )
 
+val gradientPrimaryColor = Color(30, 24, 61)
+val gradientBackgroundColor = Color(30, 30, 30)
 
 data class Colors(
     var primary: Color = Salmon,

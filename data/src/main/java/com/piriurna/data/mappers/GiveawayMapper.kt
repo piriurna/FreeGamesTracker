@@ -1,15 +1,15 @@
 package com.piriurna.data.mappers
 
 import com.piriurna.data.remote.dto.GiveawayGameDto
-import com.piriurna.domain.models.GiveawayGame
+import com.piriurna.domain.models.Game
 
 
-fun List<GiveawayGameDto>.toGiveawayGame() : List<GiveawayGame> {
+fun List<GiveawayGameDto>.toGiveawayGame() : List<Game> {
     return this.map { it.toGiveawayGame() }
 }
 
-fun GiveawayGameDto.toGiveawayGame() : GiveawayGame {
-    return GiveawayGame(
+fun GiveawayGameDto.toGiveawayGame() : Game {
+    return Game(
         id = this.id,
         title = this.title,
         description = this.description,

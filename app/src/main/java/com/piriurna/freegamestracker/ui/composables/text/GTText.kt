@@ -1,9 +1,7 @@
 package com.piriurna.freegamestracker.ui.composables.text
 
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -11,7 +9,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
-import com.piriurna.freegamestracker.ui.composables.preview.GTThemedPreviewColumn
+import com.piriurna.freegamestracker.ui.theme.AppTheme
 import com.piriurna.freegamestracker.ui.theme.GTStyle.TextPlay
 import com.piriurna.freegamestracker.ui.theme.GTStyle.TextPlay20
 import com.piriurna.freegamestracker.ui.theme.GTStyle.TextPlayBold
@@ -20,7 +18,7 @@ import com.piriurna.freegamestracker.ui.theme.GTStyle.TextPlayBold
 fun GTText(
     text: String,
     modifier: Modifier = Modifier,
-    color: Color = MaterialTheme.colors.onPrimary,
+    color: Color = AppTheme.colors.onPrimary,
     textAlign: TextAlign? = null,
     lineHeight: TextUnit = TextUnit.Unspecified,
     style: TextStyle = TextPlay,
@@ -45,9 +43,7 @@ fun GTText(
 @Preview(showBackground = false)
 @Composable
 private fun FGTextPreview() {
-    GTThemedPreviewColumn(
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
+    AppTheme {
 
         GTText(text = "Teste 1")
         GTText(text = "Teste 2", style= TextPlayBold)

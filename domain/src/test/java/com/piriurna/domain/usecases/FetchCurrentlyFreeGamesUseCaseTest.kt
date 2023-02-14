@@ -3,7 +3,7 @@ package com.piriurna.domain.usecases
 import com.piriurna.domain.ApiNetworkError
 import com.piriurna.domain.ApiNetworkResponse
 import com.piriurna.domain.Resource
-import com.piriurna.domain.models.GiveawayGame
+import com.piriurna.domain.models.Game
 import com.piriurna.domain.repositories.GiveawayGamesRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.toList
@@ -31,7 +31,7 @@ class FetchCurrentlyFreeGamesUseCaseTest {
     @Test
     fun `ask for data and receive data`() = runBlockingTest {
         whenever(giveawayGamesRepository.getGiveaways()).thenReturn(
-            ApiNetworkResponse(data = GiveawayGame.mocks)
+            ApiNetworkResponse(data = Game.mocks)
         )
 
 
@@ -41,8 +41,8 @@ class FetchCurrentlyFreeGamesUseCaseTest {
         assert(result is Resource.Loading)
 
         result = (emissions[1] as Resource)
-        val giveawayGames = (result.data as? List<GiveawayGame>)
-        assert(!giveawayGames.isNullOrEmpty())
+        val games = (result.data as? List<Game>)
+        assert(!games.isNullOrEmpty())
 
         verify(giveawayGamesRepository, times(1)).getGiveaways()
     }

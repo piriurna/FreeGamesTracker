@@ -1,7 +1,7 @@
 package com.piriurna.domain.usecases
 
 import com.piriurna.domain.Resource
-import com.piriurna.domain.models.GiveawayGame
+import com.piriurna.domain.models.Game
 import com.piriurna.domain.repositories.GiveawayGamesRepository
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -10,7 +10,7 @@ class FetchCurrentlyFreeGamesUseCase @Inject constructor(
     private val giveawayGamesRepository: GiveawayGamesRepository
 ){
 
-    operator fun invoke() = flow<Resource<List<GiveawayGame>>> {
+    operator fun invoke() = flow<Resource<List<Game>>> {
         emit(Resource.Loading())
 
         val giveawayGamesResponse = giveawayGamesRepository.getGiveaways()

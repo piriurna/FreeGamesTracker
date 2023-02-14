@@ -22,7 +22,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.piriurna.freegamestracker.R
-import com.piriurna.freegamestracker.ui.composables.preview.GTThemedPreviewColumn
 import com.piriurna.freegamestracker.ui.composables.rating.models.StarType
 import com.piriurna.freegamestracker.ui.theme.AppTheme
 
@@ -129,7 +128,7 @@ private fun ContentDrawScope.setBounds(totalCount: Int, rating : Float, imageSiz
 @Preview
 @Composable
 private fun GTStarRatingPreview() {
-    GTThemedPreviewColumn() {
+    AppTheme {
         GTStarRating(rating = 1.3f, modifier = Modifier.fillMaxWidth())
 
         GTStarRating(rating = 1.3f, modifier = Modifier.fillMaxWidth())
