@@ -71,9 +71,16 @@ fun GTRowWithLeftImageAndDescription(
                     .fillMaxHeight(),
                 verticalArrangement = Arrangement.Top,
             ) {
-
-                GTText(text = title, style = TextPlay20, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                GTText(text = genre, color = Gray)
+                GTText(
+                    text = title,
+                    style = TextPlay20,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+                GTText(
+                    text = genre,
+                    color = Gray
+                )
                 rating?.let {
                     GTStarRating(
                         modifier = Modifier

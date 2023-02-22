@@ -14,11 +14,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.ExperimentalUnitApi
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.piriurna.domain.models.Game
 import com.piriurna.freegamestracker.ui.composables.GTBottomSheet
-import com.piriurna.freegamestracker.ui.composables.GTScaffold
 import com.piriurna.freegamestracker.ui.composables.card.GTCardWithBackgroundImage
 import com.piriurna.freegamestracker.ui.composables.card.GTRowWithLeftImageAndDescription
 import com.piriurna.freegamestracker.ui.composables.text.GTText
@@ -45,50 +46,49 @@ private fun HomeScreenContent(uiState: HomeUiState) {
     BoxWithConstraints(
         modifier = Modifier.fillMaxSize()
     ) {
-        GTScaffold {
-            GTBottomSheet(
-                backgroundContent = {
-                    HomeScreenBackgroundContent()
-                },
-                sheetPeekHeight = with(LocalDensity.current){
-                    (constraints.maxHeight - pageTitleSize - 96.dp.toPx()).toDp()
-                },
-                sheetState = sheetState
+        GTBottomSheet(
+            backgroundContent = {
+                HomeScreenBackgroundContent()
+            },
+            sheetPeekHeight = with(LocalDensity.current){
+                (constraints.maxHeight - pageTitleSize - 96.dp.toPx()).toDp()
+            },
+            sheetState = sheetState
+            ) {
+                LazyColumn(
+                    Modifier
+                        .fillMaxSize()
+                        .background(
+                            color = AppTheme.colors.surface,
+                            shape = if(sheetState.isExpanded) RectangleShape else AppTheme.shapes.large
+                        )
+                        .padding(top = 20.dp),
+                    verticalArrangement = Arrangement.spacedBy(24.dp),
                 ) {
-                    LazyColumn(
-                        Modifier
-                            .fillMaxSize()
-                            .background(
-                                color = AppTheme.colors.surface,
-                                shape = if(sheetState.isExpanded) RectangleShape else AppTheme.shapes.large
-                            )
-                            .padding(top = 20.dp),
-                        verticalArrangement = Arrangement.spacedBy(24.dp),
-                    ) {
-                        item {
-                            GTText(
-                                modifier = Modifier.padding(start = 20.dp),
-                                text = "Free Games",
-                                style = GTStyle.TextPlay20
-                            )
-                        }
-                        item {
-                            FreeGamesListRow(uiState.freeGames)
-                        }
+                    item {
+                        GTText(
+                            modifier = Modifier.padding(start = 20.dp),
+                            text = "Free Games",
+                            style = GTStyle.TextPlay20
+                        )
+                    }
+                    item {
+                        FreeGamesListRow(uiState.freeGames)
+                    }
 
-                        item {
-                            GTText(modifier = Modifier.padding(start = 20.dp), text = "Upcoming Games", style = GTStyle.TextPlay20Bold)
-                        }
+                    item {
+                        GTText(modifier = Modifier.padding(start = 20.dp), text = "Upcoming Games", style = GTStyle.TextPlay20Bold)
+                    }
 
-                        item {
-                            UpcomingGamesListColumn(gameList = uiState.upcomingGames)
-                        }
+                    item {
+                        UpcomingGamesListColumn(gameList = uiState.upcomingGames)
                     }
                 }
-        }
+            }
     }
 }
 
+@OptIn(ExperimentalUnitApi::class)
 @Composable
 fun HomeScreenBackgroundContent() {
     Column(
@@ -118,7 +118,7 @@ fun HomeScreenBackgroundContent() {
         GTText(
             text = "Check What's Currently Free",
             color = Color.White,
-            lineHeight = 48.sp,
+            lineHeight = TextUnit(35f, TextUnitType.Sp),
             style = GTStyle.TextPlay28
         )
     }

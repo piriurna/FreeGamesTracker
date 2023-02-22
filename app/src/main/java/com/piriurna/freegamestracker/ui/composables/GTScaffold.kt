@@ -22,8 +22,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.piriurna.freegamestracker.ui.composables.bottomnavigation.BottomNavigationBar
 import com.piriurna.freegamestracker.ui.composables.error.GTErrorContainer
 import com.piriurna.freegamestracker.ui.composables.loading.GTLoading
+import com.piriurna.freegamestracker.ui.models.BottomNavItem
 import com.piriurna.freegamestracker.ui.models.GTError
 import com.piriurna.freegamestracker.ui.theme.AppTheme
 import com.piriurna.freegamestracker.ui.theme.FreeGamesTrackerTheme
@@ -35,9 +37,12 @@ fun GTScaffold(
     isLoading: Boolean = false,
     error : GTError? = null,
     navController: NavHostController? = null,
+    bottomNavigationItems: List<BottomNavItem> = emptyList(),
+    selectedBottomNavItem: BottomNavItem? = null,
+    setSelectedBottomNavigationItem: (BottomNavItem) -> Unit = {},
     content: @Composable (PaddingValues) -> Unit,
 ) {
-    val bottomBarHeight = 52.dp
+    val bottomBarHeight = 74.dp
 
     val bottomBarHeightPx = with(LocalDensity.current) {
         bottomBarHeight.roundToPx().toFloat()
@@ -66,6 +71,17 @@ fun GTScaffold(
         val scaffoldModifier = modifier.fillMaxSize()
         Scaffold(
             modifier = scaffoldModifier.nestedScroll(nestedScrollConnection),
+            bottomBar = {
+                selectedBottomNavItem?.let {
+                    BottomNavigationBar(
+                        navItems = bottomNavigationItems,
+                        bottomBarHeight = bottomBarHeight,
+                        bottomBarOffsetHeightPx = bottomBarOffsetHeightPx.value.toInt(),
+                        selectedRoute = selectedBottomNavItem.route,
+                        setSelectedRoute = setSelectedBottomNavigationItem
+                    )
+                }
+            },
             content = content,
         )
 
@@ -114,6 +130,18 @@ private fun SQScaffoldErrorPreview() {
         GTScaffold(
             isLoading = false,
             error = GTError.GenericError {},
+        ) {
+            Text(text = "Scaffold test")
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun SQScaffoldLoadingPreview() {
+    FreeGamesTrackerTheme() {
+        GTScaffold(
+            isLoading = true,
         ) {
             Text(text = "Scaffold test")
         }
