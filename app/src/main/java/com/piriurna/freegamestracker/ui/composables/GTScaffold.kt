@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -23,9 +24,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.piriurna.freegamestracker.ui.composables.bottomnavigation.BottomNavigationBar
+import com.piriurna.freegamestracker.ui.composables.bottomnavigation.BottomNavigationItem
 import com.piriurna.freegamestracker.ui.composables.error.GTErrorContainer
 import com.piriurna.freegamestracker.ui.composables.loading.GTLoading
-import com.piriurna.freegamestracker.ui.models.BottomNavItem
 import com.piriurna.freegamestracker.ui.models.GTError
 import com.piriurna.freegamestracker.ui.theme.AppTheme
 import com.piriurna.freegamestracker.ui.theme.FreeGamesTrackerTheme
@@ -37,13 +38,16 @@ fun GTScaffold(
     isLoading: Boolean = false,
     error : GTError? = null,
     navController: NavHostController? = null,
-    bottomNavigationItems: List<BottomNavItem> = emptyList(),
-    selectedBottomNavItem: BottomNavItem? = null,
-    setSelectedBottomNavigationItem: (BottomNavItem) -> Unit = {},
+    bottomNavigationItems: List<BottomNavigationItem> = emptyList(),
     content: @Composable (PaddingValues) -> Unit,
 ) {
-    val bottomBarHeight = 74.dp
+    val bottomBarHeight = 56.dp
 
+    val selectedBottomNavItem = remember {
+        derivedStateOf {
+            navController?.currentDestination?.route
+        }
+    }
     val bottomBarHeightPx = with(LocalDensity.current) {
         bottomBarHeight.roundToPx().toFloat()
     }
@@ -72,13 +76,13 @@ fun GTScaffold(
         Scaffold(
             modifier = scaffoldModifier.nestedScroll(nestedScrollConnection),
             bottomBar = {
-                selectedBottomNavItem?.let {
+                selectedBottomNavItem.value?.let { route ->
                     BottomNavigationBar(
-                        navItems = bottomNavigationItems,
-                        bottomBarHeight = bottomBarHeight,
-                        bottomBarOffsetHeightPx = bottomBarOffsetHeightPx.value.toInt(),
-                        selectedRoute = selectedBottomNavItem.route,
-                        setSelectedRoute = setSelectedBottomNavigationItem
+                        items = bottomNavigationItems,
+                        selectedRoute = route,
+                        onRouteSelected = {
+                            navController?.navigate(it)
+                        }
                     )
                 }
             },
