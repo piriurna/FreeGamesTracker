@@ -12,12 +12,10 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.layout.onPlaced
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.ExperimentalUnitApi
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.TextUnitType
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.*
 import com.piriurna.domain.models.Game
 import com.piriurna.freegamestracker.ui.composables.GTBottomSheet
 import com.piriurna.freegamestracker.ui.composables.card.GTCardWithBackgroundImage
@@ -40,18 +38,26 @@ fun HomeScreen(viewModel: HomeViewModel) {
 private fun HomeScreenContent(uiState: HomeUiState) {
     val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
 
-    val pageTitleSize by remember {
-        mutableStateOf(409f)
+    var pageTitleSize by remember {
+        mutableStateOf(490f)
     }
+
+    val titleTopPadding = 56.dp
+    val titleBottomPadding = 46.dp
     BoxWithConstraints(
         modifier = Modifier.fillMaxSize()
     ) {
         GTBottomSheet(
             backgroundContent = {
-                HomeScreenBackgroundContent()
+                HomeScreenBackgroundContent(
+                    paddingTop = titleTopPadding,
+                    onTitleMeasured = { size ->
+                        pageTitleSize = size
+                    }
+                )
             },
             sheetPeekHeight = with(LocalDensity.current){
-                (constraints.maxHeight - pageTitleSize - 96.dp.toPx()).toDp()
+                constraints.maxHeight.toDp() - pageTitleSize.toDp() - titleTopPadding - titleBottomPadding
             },
             sheetState = sheetState
             ) {
@@ -60,10 +66,9 @@ private fun HomeScreenContent(uiState: HomeUiState) {
                         .fillMaxSize()
                         .background(
                             color = AppTheme.colors.surface,
-                            shape = if(sheetState.isExpanded) RectangleShape else AppTheme.shapes.large
-                        )
-                        .padding(top = 20.dp),
-                    verticalArrangement = Arrangement.spacedBy(24.dp),
+                            shape = if (sheetState.isExpanded) RectangleShape else AppTheme.shapes.large
+                        ),
+                    contentPadding = PaddingValues(top = 28.dp)
                 ) {
                     item {
                         GTText(
@@ -73,15 +78,36 @@ private fun HomeScreenContent(uiState: HomeUiState) {
                         )
                     }
                     item {
+                        Spacer(modifier = Modifier.height(24.dp))
+                    }
+                    item {
                         FreeGamesListRow(uiState.freeGames)
                     }
-
                     item {
-                        GTText(modifier = Modifier.padding(start = 20.dp), text = "Upcoming Games", style = GTStyle.TextPlay20Bold)
+                        Spacer(modifier = Modifier.height(24.dp))
                     }
-
                     item {
-                        UpcomingGamesListColumn(gameList = uiState.upcomingGames)
+                        GTText(
+                            modifier = Modifier.padding(start = 20.dp),
+                            text = "Upcoming Games",
+                            style = GTStyle.TextPlay20Bold
+                        )
+                    }
+                    item {
+                        Spacer(modifier = Modifier.height(24.dp))
+                    }
+                    items(uiState.upcomingGames){game ->
+                        GTRowWithLeftImageAndDescription(
+                            modifier = Modifier.padding(horizontal = 20.dp),
+                            title = game.title,
+                            genre = game.status,
+                            gameImage = game.image,
+                            rating = game.rating
+                        )
+                        Spacer(modifier = Modifier.height(12.dp))
+                    }
+                    item {
+                        Spacer(modifier = Modifier.height(24.dp))
                     }
                 }
             }
@@ -90,7 +116,10 @@ private fun HomeScreenContent(uiState: HomeUiState) {
 
 @OptIn(ExperimentalUnitApi::class)
 @Composable
-fun HomeScreenBackgroundContent() {
+fun HomeScreenBackgroundContent(
+    onTitleMeasured: (Float) -> Unit,
+    paddingTop: Dp
+) {
     Column(
         verticalArrangement= Arrangement.Top,
         modifier = Modifier
@@ -105,22 +134,27 @@ fun HomeScreenBackgroundContent() {
                 )
             )
             .fillMaxSize()
-            .padding(top = 54.dp)
+            .padding(top = paddingTop)
             .padding(horizontal = 26.dp)
 
     ) {
-        GTText(
-            text = "Welcome,",
-            color = AppTheme.colors.onPrimary,
-            style = GTStyle.TextPlay48Bold
-        )
+        Column(
+            modifier = Modifier.onPlaced { coordinates ->
+                onTitleMeasured(coordinates.size.height.toFloat()) }
+        ) {
+            GTText(
+                text = "Welcome,",
+                color = AppTheme.colors.onPrimary,
+                style = GTStyle.TextPlay48Bold
+            )
 
-        GTText(
-            text = "Check What's Currently Free",
-            color = Color.White,
-            lineHeight = TextUnit(35f, TextUnitType.Sp),
-            style = GTStyle.TextPlay28
-        )
+            GTText(
+                text = "Check What's Currently Free",
+                color = Color.White,
+                lineHeight = TextUnit(35f, TextUnitType.Sp),
+                style = GTStyle.TextPlay28
+            )
+        }
     }
 }
 
@@ -133,23 +167,6 @@ private fun FreeGamesListRow(gameList : List<Game>) {
         items(gameList) { game ->
             GTCardWithBackgroundImage(
                 title = game.title,
-                gameImage = game.image,
-                rating = game.rating
-            )
-        }
-    }
-}
-
-@Composable
-fun UpcomingGamesListColumn(gameList : List<Game>) {
-    Column(
-        modifier = Modifier.padding(start = 20.dp, end = 20.dp, bottom = 20.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
-        gameList.forEach { game ->
-            GTRowWithLeftImageAndDescription(
-                title = game.title,
-                genre = game.status,
                 gameImage = game.image,
                 rating = game.rating
             )
