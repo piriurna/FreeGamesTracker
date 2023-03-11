@@ -10,4 +10,8 @@
     <string name="no_internet_connection_available">No Internet Connection Available</string>
     <string name="the_service_is_currently_unavailable">The service is currently unavailable.</string>
     <string name="an_error_has_occurred">An error has occurred</string>
+    <string name="home_screen_title_first_line">Welcome,</string>
+    <string name="check_whats_currently_free">Check What\'s Currently Free</string>
+    <string name="free_games">Free Games</string>
+    <string name="upcoming_games">Upcoming Games</string>
 </resources>

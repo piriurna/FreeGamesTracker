@@ -14,13 +14,27 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.onPlaced
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.*
 import com.piriurna.domain.models.Game
+import com.piriurna.freegamestracker.R
 import com.piriurna.freegamestracker.ui.composables.GTBottomSheet
 import com.piriurna.freegamestracker.ui.composables.card.GTCardWithBackgroundImage
 import com.piriurna.freegamestracker.ui.composables.card.GTRowWithLeftImageAndDescription
 import com.piriurna.freegamestracker.ui.composables.text.GTText
+import com.piriurna.freegamestracker.ui.screens.home.theme.HomeScreenDimensions.BackgroundGradientCenter
+import com.piriurna.freegamestracker.ui.screens.home.theme.HomeScreenDimensions.BackgroundGradientRadius
+import com.piriurna.freegamestracker.ui.screens.home.theme.HomeScreenDimensions.BackgroundHorizontalPadding
+import com.piriurna.freegamestracker.ui.screens.home.theme.HomeScreenDimensions.BottomSheetContentHorizontalPadding
+import com.piriurna.freegamestracker.ui.screens.home.theme.HomeScreenDimensions.BottomSheetContentTopPadding
+import com.piriurna.freegamestracker.ui.screens.home.theme.HomeScreenDimensions.BottomSheetItemSpacing
+import com.piriurna.freegamestracker.ui.screens.home.theme.HomeScreenDimensions.DefaultTitleSize
+import com.piriurna.freegamestracker.ui.screens.home.theme.HomeScreenDimensions.FreeGamesHorizontalPadding
+import com.piriurna.freegamestracker.ui.screens.home.theme.HomeScreenDimensions.FreeGamesHorizontalSpacing
+import com.piriurna.freegamestracker.ui.screens.home.theme.HomeScreenDimensions.TitleBottomPadding
+import com.piriurna.freegamestracker.ui.screens.home.theme.HomeScreenDimensions.TitleTopPadding
+import com.piriurna.freegamestracker.ui.screens.home.theme.HomeScreenDimensions.UpcomingGamesItemSpacing
 import com.piriurna.freegamestracker.ui.theme.AppTheme
 import com.piriurna.freegamestracker.ui.theme.GTStyle
 import com.piriurna.freegamestracker.ui.theme.gradientBackgroundColor
@@ -39,25 +53,23 @@ private fun HomeScreenContent(uiState: HomeUiState) {
     val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
 
     var pageTitleSize by remember {
-        mutableStateOf(490f)
+        mutableStateOf(DefaultTitleSize)
     }
 
-    val titleTopPadding = 56.dp
-    val titleBottomPadding = 46.dp
     BoxWithConstraints(
         modifier = Modifier.fillMaxSize()
     ) {
         GTBottomSheet(
             backgroundContent = {
                 HomeScreenBackgroundContent(
-                    paddingTop = titleTopPadding,
+                    paddingTop = TitleTopPadding,
                     onTitleMeasured = { size ->
                         pageTitleSize = size
                     }
                 )
             },
             sheetPeekHeight = with(LocalDensity.current){
-                constraints.maxHeight.toDp() - pageTitleSize.toDp() - titleTopPadding - titleBottomPadding
+                constraints.maxHeight.toDp() - pageTitleSize.toDp() - TitleTopPadding - TitleBottomPadding
             },
             sheetState = sheetState
             ) {
@@ -68,53 +80,55 @@ private fun HomeScreenContent(uiState: HomeUiState) {
                             color = AppTheme.colors.surface,
                             shape = if (sheetState.isExpanded) RectangleShape else AppTheme.shapes.large
                         ),
-                    contentPadding = PaddingValues(top = 28.dp)
+                    contentPadding = PaddingValues(top = BottomSheetContentTopPadding)
                 ) {
                     item {
                         GTText(
-                            modifier = Modifier.padding(start = 20.dp),
-                            text = "Free Games",
+                            modifier = Modifier
+                                .padding(start = BottomSheetContentHorizontalPadding),
+                            text = stringResource(R.string.free_games),
                             style = GTStyle.TextPlay20
                         )
                     }
                     item {
-                        Spacer(modifier = Modifier.height(24.dp))
+                        Spacer(
+                            modifier = Modifier.height(BottomSheetItemSpacing)
+                        )
                     }
                     item {
                         FreeGamesListRow(uiState.freeGames)
                     }
                     item {
-                        Spacer(modifier = Modifier.height(24.dp))
+                        Spacer(modifier = Modifier.height(BottomSheetItemSpacing))
                     }
                     item {
                         GTText(
-                            modifier = Modifier.padding(start = 20.dp),
-                            text = "Upcoming Games",
+                            modifier = Modifier.padding(start = BottomSheetContentHorizontalPadding),
+                            text = stringResource(R.string.upcoming_games),
                             style = GTStyle.TextPlay20Bold
                         )
                     }
                     item {
-                        Spacer(modifier = Modifier.height(24.dp))
+                        Spacer(modifier = Modifier.height(BottomSheetItemSpacing))
                     }
                     items(uiState.upcomingGames){game ->
                         GTRowWithLeftImageAndDescription(
-                            modifier = Modifier.padding(horizontal = 20.dp),
+                            modifier = Modifier.padding(horizontal = BottomSheetContentHorizontalPadding),
                             title = game.title,
                             genre = game.status,
                             gameImage = game.image,
                             rating = game.rating
                         )
-                        Spacer(modifier = Modifier.height(12.dp))
+                        Spacer(modifier = Modifier.height(UpcomingGamesItemSpacing))
                     }
                     item {
-                        Spacer(modifier = Modifier.height(24.dp))
+                        Spacer(modifier = Modifier.height(BottomSheetItemSpacing))
                     }
                 }
             }
     }
 }
 
-@OptIn(ExperimentalUnitApi::class)
 @Composable
 fun HomeScreenBackgroundContent(
     onTitleMeasured: (Float) -> Unit,
@@ -125,8 +139,8 @@ fun HomeScreenBackgroundContent(
         modifier = Modifier
             .background(
                 brush = Brush.radialGradient(
-                    radius = 900f,
-                    center = Offset(x = 350f, y = 350f),
+                    radius = BackgroundGradientRadius,
+                    center = Offset(x = BackgroundGradientCenter, y = BackgroundGradientCenter),
                     colors = listOf(
                         gradientPrimaryColor,
                         gradientBackgroundColor,
@@ -135,7 +149,7 @@ fun HomeScreenBackgroundContent(
             )
             .fillMaxSize()
             .padding(top = paddingTop)
-            .padding(horizontal = 26.dp)
+            .padding(horizontal = BackgroundHorizontalPadding)
 
     ) {
         Column(
@@ -143,15 +157,14 @@ fun HomeScreenBackgroundContent(
                 onTitleMeasured(coordinates.size.height.toFloat()) }
         ) {
             GTText(
-                text = "Welcome,",
+                text = stringResource(R.string.home_screen_title_first_line),
                 color = AppTheme.colors.onPrimary,
                 style = GTStyle.TextPlay48Bold
             )
 
             GTText(
-                text = "Check What's Currently Free",
+                text = stringResource(R.string.check_whats_currently_free),
                 color = Color.White,
-                lineHeight = TextUnit(35f, TextUnitType.Sp),
                 style = GTStyle.TextPlay28
             )
         }
@@ -161,8 +174,8 @@ fun HomeScreenBackgroundContent(
 @Composable
 private fun FreeGamesListRow(gameList : List<Game>) {
     LazyRow(
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        contentPadding = PaddingValues(horizontal = 20.dp)
+        horizontalArrangement = Arrangement.spacedBy(FreeGamesHorizontalSpacing),
+        contentPadding = PaddingValues(horizontal = FreeGamesHorizontalPadding)
     ) {
         items(gameList) { game ->
             GTCardWithBackgroundImage(
