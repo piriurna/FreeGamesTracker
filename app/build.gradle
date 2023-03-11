@@ -1,18 +1,25 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
-    namespace 'com.piriurna.freegamestracker'
-    compileSdk 32
+    namespace rootProject.androidconfig.namespace
+    compileSdk rootProject.androidconfig.compileSdk
+
+
+    packagingOptions {
+        pickFirst  '**'
+    }
 
     defaultConfig {
-        applicationId "com.piriurna.freegamestracker"
-        minSdk 28
-        targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        applicationId rootProject.androidconfig.applicationId
+        minSdk rootProject.androidconfig.minSdk
+        targetSdk rootProject.androidconfig.targetSdk
+        versionCode rootProject.androidconfig.versionCode
+        versionName rootProject.androidconfig.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -24,6 +31,17 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "GAMER_POWER_BASE_URL", "\"https://www.gamerpower.com/api/\"")
+            buildConfigField("Long", "READ_TIMEOUT", "15L")
+            buildConfigField("Long", "CONNECT_TIMEOUT", "15L")
+        }
+
+        debug {
+            debuggable true
+            minifyEnabled false
+            buildConfigField("String", "GAMER_POWER_BASE_URL", "\"https://www.gamerpower.com/api/\"")
+            buildConfigField("Long", "READ_TIMEOUT", "15L")
+            buildConfigField("Long", "CONNECT_TIMEOUT", "15L")
         }
     }
     compileOptions {
@@ -31,13 +49,13 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = rootProject.androidconfig.jvmTarget
     }
     buildFeatures {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion '1.1.1'
+        kotlinCompilerExtensionVersion rootProject.versions.composeCompiler
     }
     packagingOptions {
         resources {
@@ -47,17 +65,29 @@ android {
 }
 
 dependencies {
+    implementation project(':domain')
+    implementation project(':data')
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
-    implementation 'androidx.activity:activity-compose:1.3.1'
-    implementation "androidx.compose.ui:ui:$compose_ui_version"
-    implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
-    implementation 'androidx.compose.material:material:1.1.1'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
-    debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
-    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
+    implementation rootProject.libraries.androidx
+    implementation rootProject.libraries.lifecycleRuntimeKtx
+    implementation rootProject.libraries.activityCompose
+    implementation rootProject.libraries.compose
+    implementation rootProject.libraries.composeMaterial
+    implementation rootProject.libraries.composeUiTooling
+
+    testImplementation rootProject.libraries.jUnit
+    androidTestImplementation rootProject.tests.espresso
+
+    androidTestImplementation rootProject.tests.uiTestJunit4
+    debugImplementation rootProject.libraries.uiTooling
+    debugImplementation rootProject.tests.uiTestManifest
+
+    implementation rootProject.libraries.coilCompose
+
+    implementation rootProject.libraries.hiltAndroid
+    kapt rootProject.libraries.hiltAndroidCompiler
+
+    implementation rootProject.libraries.hiltNavigationCompose
+
+    implementation rootProject.libraries.lottie
 }
